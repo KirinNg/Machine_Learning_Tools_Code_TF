@@ -32,17 +32,18 @@ lr = 1
 subdivisions = 10
 
 # common train
-train_op = tf.train.RMSPropOptimizer(lr, decay=0.9, epsilon=1.0).minimize(loss)
+train_op = tf.train.RMSPropOptimizer(lr, decay=0.9, epsilon=1.0).minimize(total_loss)
 
 
 # 手动赋值梯度
 # 创建一个optimizer.
 opt = tf.train.GradientDescentOptimizer(learning_rate=0.1)
 # 计算<list of variables>相关的梯度
-grads_and_vars = opt.compute_gradients(loss, <list of variables>)
+var = tf.trainable_variables()
+grads_and_vars = opt.compute_gradients(total_loss, var)
 # grads_and_vars为tuples (gradient, variable)组成的列表。
 # 令optimizer运用capped的梯度(gradients)
-opt.apply_gradients(capped_grads_and_vars)
+opt.apply_gradients(grads_and_vars)
 
 
 # sym. traning on single GPU
@@ -104,17 +105,13 @@ with tf.device("/cpu:0"):
     with tf.variable_scope(tf.get_variable_scope()):
         for i in range(num_gpus):
             with tf.device(assign_to_device('/gpu:{}'.format(i), ps_device='/cpu:0')):
-                _x = X[i * batch_size:(i + 1) * batch_size]
-                _y = Y[i * batch_size:(i + 1) * batch_size]
-                logits = conv_net(_x, True)
+                # _x = X[i * batch_size:(i + 1) * batch_size]
+                # _y = Y[i * batch_size:(i + 1) * batch_size]
+                # logits = conv_net(_x, True)
                 tf.get_variable_scope().reuse_variables()
                 loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=_y, logits=logits))
                 grads = opt.compute_gradients(loss)
                 tower_grads.append(grads)
-                if i == 0:
-                    logits_test = conv_net(_x, False)
-                    correct_prediction = tf.equal(tf.argmax(logits_test, 1), tf.argmax(_y, 1))
-                    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
     grads = average_gradients(tower_grads)
     train_op = opt.apply_gradients(grads)
 
