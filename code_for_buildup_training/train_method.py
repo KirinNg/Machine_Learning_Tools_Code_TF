@@ -1,36 +1,52 @@
 import tensorflow as tf
 import numpy as np
 
+sess = tf.Session()
+global_steps = tf.Variable(0, trainable=False)
+
+
+# fast feed
+cleanimg_ph = tf.placeholder(tf.float32, [None, 32, 32, 3])
+label_ph = tf.placeholder(tf.float32, [None, 10])
+keepprob_ph = tf.placeholder(tf.float32)
+
+def get_feed(batch_image, batch_label, type="train"):
+    if type == "train":
+        return {cleanimg_ph: batch_image, label_ph: batch_label, keepprob_ph: 0.5}
+    else:
+        return {cleanimg_ph: batch_image, label_ph: batch_label, keepprob_ph: 1.0}
+
+
 
 # load target var
 restore_vars = [
     var for var in tf.global_variables()
     if var.name.startswith('InceptionV3/') and "RMSProp" not in var.name
 ]
-pre_train_saver = tf.train.Saver()
+pre_train_saver = tf.train.Saver(restore_vars)
 
 
-# sess and global step
-sess_config = tf.ConfigProto()
-sess_config.gpu_options.allow_growth = True
-sess = tf.Session(config=sess_config)
-global_steps = tf.Variable(0, trainable=False)
-
-
-# Advanced Learning rate
-epoch_per_step = 1
-lr_decay = tf.train.exponential_decay(0.045, global_steps, 2*epoch_per_step, 0.94)
-
-boundaries = [20000*3, 50000*3]
-learing_rates = [0.01, 0.001, 0.0001]
-lr_split = tf.train.piecewise_constant(global_steps, boundaries=boundaries, values=learing_rates)
-
-
-# sym. traning on single GPU
+# train op setting
 total_loss = 0
 lr = 1
 subdivisions = 10
 
+# common train
+train_op = tf.train.RMSPropOptimizer(lr, decay=0.9, epsilon=1.0).minimize(loss)
+
+
+# 手动赋值梯度
+# 创建一个optimizer.
+opt = GradientDescentOptimizer(learning_rate=0.1)
+# 计算<list of variables>相关的梯度
+grads_and_vars = opt.compute_gradients(loss, <list of variables>)
+# grads_and_vars为tuples (gradient, variable)组成的列表。
+# 令optimizer运用capped的梯度(gradients)
+opt.apply_gradients(capped_grads_and_vars)
+
+
+# sym. traning on single GPU
+# 梯度保存实现单机超大batch训练
 train_op = tf.train.RMSPropOptimizer(lr, decay=0.9, epsilon=1.0)
 grads_vars = train_op.compute_gradients(total_loss, tf.trainable_variables())
 for i in range(len(grads_vars))[::-1]:
@@ -54,53 +70,63 @@ for i in range(1):
     sess.run(apply_grad_op)
 
 
-# env.
-import os
-os.environ["CUDA_VISIBLE_DEVICES"] = "0"
+# 多GPU常用的代码片段
+num_gpus = 8
+def average_gradients(tower_grads):
+    average_grads = []
+    for grad_and_vars in zip(*tower_grads):
+        grads = []
+        for g, _ in grad_and_vars:
+            expend_g = tf.expand_dims(g, 0)
+            grads.append(expend_g)
+        grad = tf.concat(grads, 0)
+        grad = tf.reduce_mean(grad, 0)
+        v = grad_and_vars[0][1]
+        grad_and_var = (grad, v)
+        average_grads.append(grad_and_var)
+    return average_grads
+ 
+PS_OPS = ['Variable', 'VariableV2', 'AutoReloadVariable']
+def assign_to_device(device, ps_device='/cpu:0'):
+    def _assign(op):
+        node_def = op if isinstance(op, tf.NodeDef) else op.node_def
+        if node_def.op in PS_OPS:
+            return "/" + ps_device
+        else:
+            return device 
+    return _assign
+
+with tf.device("/cpu:0"):
+    tower_grads = []
+    X = tf.placeholder(tf.float32, [None, 10])
+    Y = tf.placeholder(tf.float32, [None, 10])
+    opt = tf.train.AdamOptimizer(learning_rate)
+    with tf.variable_scope(tf.get_variable_scope()):
+        for i in range(num_gpus):
+            with tf.device(assign_to_device('/gpu:{}'.format(i), ps_device='/cpu:0')):
+                _x = X[i * batch_size:(i + 1) * batch_size]
+                _y = Y[i * batch_size:(i + 1) * batch_size]
+                logits = conv_net(_x, True)
+                tf.get_variable_scope().reuse_variables()
+                loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=_y, logits=logits))
+                grads = opt.compute_gradients(loss)
+                tower_grads.append(grads)
+                if i == 0:
+                    logits_test = conv_net(_x, False)
+                    correct_prediction = tf.equal(tf.argmax(logits_test, 1), tf.argmax(_y, 1))
+                    accuracy = tf.reduce_mean(tf.cast(correct_prediction, tf.float32))
+    grads = average_gradients(tower_grads)
+    train_op = opt.apply_gradients(grads)
 
 
-# fast feed
-cleanimg_ph = tf.placeholder(tf.float32, [None, 32, 32, 3])
-label_ph = tf.placeholder(tf.float32, [None, 10])
-keepprob_ph = tf.placeholder(tf.float32)
+# 使用batchnorm可能会用到的代码段
+update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
+with tf.control_dependencies(update_ops):
+    train_op = optimizer.minimize(loss)
 
-def get_feed(batch_image, batch_label, type="train"):
-    if type == "train":
-        return {cleanimg_ph: batch_image, label_ph: batch_label, keepprob_ph: 0.5}
-    else:
-        return {cleanimg_ph: batch_image, label_ph: batch_label, keepprob_ph: 1.0}
-
-
-# eval in traning
-# top N
-logits = None
-batch_size = 32
-def caculate_topK(indices, k, batch_size=128):
-    label = tf.argmax(label_ph, axis=1, output_type=tf.int32)
-    a = indices - tf.reshape(label, (batch_size, 1))
-    b = tf.equal(a, tf.zeros(shape=(batch_size, k), dtype=tf.int32))
-    return tf.reduce_mean(tf.reduce_sum(tf.cast(b, tf.float32), axis=1), name='top_{}'.format(k))
-
-_, top_5_indices = tf.nn.top_k(logits, k=5, name='top_5_indices')
-acc_top_5 = caculate_topK(top_5_indices, 5, batch_size)
-
-# acc
-correct_p = tf.equal(tf.argmax(logits, 1), (tf.argmax(label_ph, 1)))
-accuracy = tf.reduce_mean(tf.cast(correct_p, "float"))
-
-
-# cal time
-import datetime
-
-for e in range(5):
-    begin_time = datetime.datetime.now()
-    end_time = datetime.datetime.now()
-    during_time = end_time - begin_time
-    print(during_time.microseconds)
-
-
-# trick for tqgm
-import tqdm
-pbar = tqdm.trange(iter)
-for k in pbar:
-    pbar.set_description("hello!")
+var_list = tf.trainable_variables()
+g_list = tf.global_variables()
+bn_moving_vars = [g for g in g_list if 'moving_mean' in g.name]
+bn_moving_vars += [g for g in g_list if 'moving_variance' in g.name]
+var_list += bn_moving_vars
+saver = tf.train.Saver(var_list=var_list, max_to_keep=5)
