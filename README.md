@@ -7,5 +7,5 @@
 本项目会进行长期维护，欢迎fork&star
 愿意提供好用的代码片段的同学，欢迎将其发送至邮箱：kirinng0709@gmail.com 在收录后会标注代码出处和更新致谢名录
 
-项目开发者：
+项目开发者：  
 Shangxi Wu, Beijing Jiaotong University
