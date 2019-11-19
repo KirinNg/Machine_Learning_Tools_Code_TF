@@ -20,11 +20,6 @@ def conv2d(x, n_in, n_out, k, s, p='SAME', bias=False, scope='conv'):
   return conv
 
 
-# def batch_norm(x, phase_train, scope='bn', reuse=tf.AUTO_REUSE):
-#     # return tf.layers.batch_normalization(x, momentum=0.99, epsilon=1e-5, training=phase_train, name=scope, reuse=reuse)
-#     return x
-
-
 def batch_norm(x, phase_train, scope, epsilon=1e-3, decay=0.99, reuse=tf.AUTO_REUSE):
     """ Assume nd [batch, N1, N2, ..., Nm, Channel] tensor"""
     with tf.variable_scope(scope, reuse=reuse):
