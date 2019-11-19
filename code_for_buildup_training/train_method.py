@@ -37,7 +37,7 @@ train_op = tf.train.RMSPropOptimizer(lr, decay=0.9, epsilon=1.0).minimize(loss)
 
 # 手动赋值梯度
 # 创建一个optimizer.
-opt = GradientDescentOptimizer(learning_rate=0.1)
+opt = tf.train.GradientDescentOptimizer(learning_rate=0.1)
 # 计算<list of variables>相关的梯度
 grads_and_vars = opt.compute_gradients(loss, <list of variables>)
 # grads_and_vars为tuples (gradient, variable)组成的列表。
@@ -100,7 +100,7 @@ with tf.device("/cpu:0"):
     tower_grads = []
     X = tf.placeholder(tf.float32, [None, 10])
     Y = tf.placeholder(tf.float32, [None, 10])
-    opt = tf.train.AdamOptimizer(learning_rate)
+    opt = tf.train.AdamOptimizer(lr)
     with tf.variable_scope(tf.get_variable_scope()):
         for i in range(num_gpus):
             with tf.device(assign_to_device('/gpu:{}'.format(i), ps_device='/cpu:0')):
@@ -122,7 +122,7 @@ with tf.device("/cpu:0"):
 # 使用batchnorm可能会用到的代码段
 update_ops = tf.get_collection(tf.GraphKeys.UPDATE_OPS)
 with tf.control_dependencies(update_ops):
-    train_op = optimizer.minimize(loss)
+    train_op = opt.minimize(loss)
 
 var_list = tf.trainable_variables()
 g_list = tf.global_variables()
