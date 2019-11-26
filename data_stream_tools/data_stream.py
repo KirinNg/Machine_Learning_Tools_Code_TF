@@ -94,18 +94,9 @@ class Cifar_datastream:
         img_placeholder = tf.placeholder(tf.float32, [None, 32, 32, 3])
         labels_placeholder = tf.placeholder(tf.int32, [None])
 
-        if augmentation:
-            # img = tf.image.resize_image_with_crop_or_pad(img_placeholder, self.IMAGE_SIZE + 4, self.IMAGE_SIZE + 4)
-            # img = tf.map_fn(lambda x: tf.image.random_crop(x, [self.IMAGE_SIZE, self.IMAGE_SIZE, 3]), img, parallel_iterations=50000)
-            img = tf.image.random_flip_left_right(img_placeholder)
-            # img = tf.image.random_brightness(img, max_delta=0.1)
-            # img = tf.image.random_contrast(img, lower=0.2, upper=1.8)
-            self.train_data_img = (img / 255 - 0.5) * 2
-        else:
-            self.train_data_img = (img_placeholder / 255 - 0.5) * 2
 
-
-        self.test_data_img = (img_placeholder / 255 - 0.5) *2
+        self.train_data_img = img_placeholder
+        self.test_data_img = img_placeholder
 
         self.train_iterator = tf.data.Dataset.from_tensor_slices(
             (self.train_data_img, tf.one_hot(labels_placeholder, 10))).shuffle(
@@ -116,7 +107,6 @@ class Cifar_datastream:
             (self.test_data_img, tf.one_hot(labels_placeholder, 10))).shuffle(
             1).batch(batchsize).repeat().make_initializable_iterator()
         self.test_data = self.test_iterator.get_next()
-
 
         sess.run(self.train_iterator.initializer,
                  feed_dict={img_placeholder: train_cifar_image, labels_placeholder: train_cifar_label})
@@ -149,12 +139,7 @@ class ImageNet_datastream:
         coord = tf.train.Coordinator()
         threads = tf.train.start_queue_runners(self.sess, coord)
 
-        _R_MEAN = 123.68
-        _G_MEAN = 116.78
-        _B_MEAN = 103.94
-
     def read_and_decode(self, path, type="train", batchsize=10, imgsize=224):
-        means = [123, 116, 103]
         if type == "train":
             file_path = os.path.join(path, "train-*")
             num_samples = 1281167
@@ -165,21 +150,10 @@ class ImageNet_datastream:
 
             image = self._fixed_sides_resize(image, output_height=imgsize, output_width=imgsize)
 
-            image = tf.image.random_flip_left_right(image)
-            image = tf.image.random_brightness(image, max_delta=0.1)
-            image = tf.image.random_contrast(image, lower=0.2, upper=1.8)
-
-            # method 1
-            # channels = tf.split(axis=3, num_or_size_splits=3, value=image)
-            # for i in range(3):
-            #     channels[i] -= means[i]
-            # image = tf.concat(axis=3, values=channels)/255
-
-            # method 2
-            image = 2 * (image / 255 - 0.5)
-
-            img_batch, label_batch = tf.train.shuffle_batch([image, label], batch_size=batchsize, num_threads=128,
-                                                            capacity=8192*3, min_after_dequeue=8192*2)
+            # img_batch, label_batch = tf.train.shuffle_batch([image, label], batch_size=batchsize, num_threads=128,
+            #                                                 capacity=8192*3, min_after_dequeue=8192*2)
+            img_batch, label_batch = tf.train.batch([image, label], batch_size=batchsize,
+                                                    allow_smaller_final_batch=True)
             label_batch = tf.one_hot(label_batch-1, 1000)
             return img_batch, label_batch
         else:
@@ -192,21 +166,11 @@ class ImageNet_datastream:
 
             image = self._fixed_sides_resize(image, output_height=imgsize, output_width=imgsize)
 
-            # method 1
-            # channels = tf.split(axis=2, num_or_size_splits=3, value=image)
-            # for i in range(3):
-            #     channels[i] -= means[i]
-            # image = tf.concat(axis=2, values=channels)/255
-
-            # method 2
-            image = 2 * (image / 255 - 0.5)
-
             img_batch, label_batch = tf.train.batch([image, label], batch_size=batchsize, allow_smaller_final_batch=True)
             # img_batch, label_batch = tf.train.shuffle_batch([image, label], batch_size=batchsize, num_threads=16,
             #                                                 capacity=4096, min_after_dequeue=512)
             label_batch = tf.one_hot(label_batch-1, 1000)
             return img_batch, label_batch
-
 
     def _fixed_sides_resize(self, image, output_height, output_width):
         """Resize images by fixed sides.

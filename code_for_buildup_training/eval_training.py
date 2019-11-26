@@ -42,3 +42,22 @@ def variable_summaries(var, name):
         # 计算变量的标准差，并定义生成其日志的操作。
         stddev = tf.sqrt(tf.reduce_mean(tf.square(var-mean)))
         tf.summary.scalar('stddev/' + name, stddev)
+
+
+sess = None
+total_loss = 0
+log_path = "log/"
+train_writer = tf.summary.FileWriter(log_path + "train", sess.graph)
+val_writer = tf.summary.FileWriter(log_path + "val", sess.graph)
+
+# for var in var_list:
+#     tf.summary.histogram(var.name, var)
+
+with tf.name_scope("loss"):
+    tf.summary.scalar('total_loss', total_loss)
+
+with tf.name_scope("acc"):
+    tf.summary.scalar('accuracy', accuracy)
+    tf.summary.scalar('top-5', acc_top_5)
+
+summary_op = tf.summary.merge_all()
