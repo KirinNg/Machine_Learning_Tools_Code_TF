@@ -6,6 +6,9 @@ import nets.resnet as resnet
 import nets.alexnet as alexnet
 import nets.resnet_v1 as resnet_v1
 import tensorflow.contrib.slim as slim
+from useful_networks.preprocess.vgg import *
+from useful_networks.preprocess.inception import *
+from useful_networks.preprocess.cifar import *
 
 
 def lenet_net(image, reuse=tf.AUTO_REUSE, keep_prop=0.5, is_train=True):
@@ -65,12 +68,14 @@ def Alex_net(image, reuse=tf.AUTO_REUSE, keep_prop=0.5):
     return logits, probs, end_point
 
 
-def vgg_net(image, reuse=tf.AUTO_REUSE, keep_prop=0.5):
-    image = tf.reshape(image, [-1, 224, 224, 3])
+def VGG16(image, reuse=tf.AUTO_REUSE):
+    preprocess = lambda x: preprocess_image(x, 224, 224, is_training=False)
+    preprocessed = tf.map_fn(preprocess, elems=image)
+    # preprocessed = preprocess_for_eval(image, 224, 224, 256)
+    arg_scope = vgg.vgg_arg_scope(weight_decay=0.0)
     with tf.variable_scope(name_or_scope='', reuse=reuse):
-        arg_scope = vgg.vgg_arg_scope()
         with slim.arg_scope(arg_scope):
-            logits, end_point = vgg.vgg_16(image, 1000, is_training=False, dropout_keep_prob=keep_prop)
+            logits, end_point = vgg.vgg_16(preprocessed, 1000, is_training=False, dropout_keep_prob=1.0)
             probs = tf.nn.softmax(logits)  # probabilities
     return logits, probs, end_point
 

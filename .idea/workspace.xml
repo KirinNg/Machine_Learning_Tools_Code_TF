@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bfde0ef8-9807-4e87-88d4-1ce9ed13d081" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/Machine_Learning_Tools_Code_TF.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/useful_networks/preprocess/cifar.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/useful_networks/preprocess/inception.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/useful_networks/preprocess/vgg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_for_buildup_training/eval_training.py" beforeDir="false" afterPath="$PROJECT_DIR$/code_for_buildup_training/eval_training.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/code_for_buildup_training/loop&amp;calculating_time.py" beforeDir="false" afterPath="$PROJECT_DIR$/code_for_buildup_training/loop&amp;calculating_time.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data_stream_tools/preprocess_table.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code_for_buildup_training/sess&amp;env.py" beforeDir="false" afterPath="$PROJECT_DIR$/code_for_buildup_training/sess&amp;env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/useful_networks/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/useful_networks/model.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,8 +18,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/useful_networks/model.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="41" column="64" lean-forward="true" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="64" />
+            <state relative-caret-position="242">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -32,11 +27,20 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/explainAI_Adversarial/attack_method.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="66">
+              <caret line="5" selection-start-line="5" selection-end-line="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/data_stream_tools/data_stream.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="175" column="60" lean-forward="true" selection-start-line="172" selection-start-column="12" selection-end-line="175" selection-end-column="60" />
+            <state relative-caret-position="2012">
+              <caret line="109" selection-start-line="109" selection-end-line="109" />
               <folding>
                 <element signature="e#0#67#0" expanded="true" />
               </folding>
@@ -45,10 +49,17 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data_stream_tools/cifar10_input.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2508" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/useful_networks/preprocess/inception.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7590">
-              <caret line="345" column="36" selection-start-line="345" selection-start-column="36" selection-end-line="345" selection-end-column="36" />
+            <state relative-caret-position="-650">
+              <caret line="296" column="20" selection-start-line="296" selection-start-column="4" selection-end-line="296" selection-end-column="20" />
               <folding>
                 <element signature="e#764#802#0" expanded="true" />
               </folding>
@@ -68,7 +79,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/useful_networks/preprocess/vgg.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="7722">
@@ -83,8 +94,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code_for_buildup_training/sess&amp;env.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+            <state relative-caret-position="450">
+              <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
             </state>
           </provider>
         </entry>
@@ -99,30 +110,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="308">
               <caret line="14" column="34" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/code_for_buildup_training/train_method.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="18" selection-start-line="18" selection-end-line="18" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/explainAI_Adversarial/PGD_demo.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-264">
-              <caret selection-end-line="19" selection-end-column="45" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -142,7 +129,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/data_stream_tools/data_stream.py" />
         <option value="$PROJECT_DIR$/useful_networks/nets/resnet.py" />
         <option value="$PROJECT_DIR$/explainAI_Adversarial/GradCam/gradcam.py" />
         <option value="$PROJECT_DIR$/explainAI_Adversarial/GradCam_demo.py" />
@@ -152,6 +138,10 @@
         <option value="$PROJECT_DIR$/useful_networks/preprocess/inception.py" />
         <option value="$PROJECT_DIR$/useful_networks/preprocess/cifar.py" />
         <option value="$PROJECT_DIR$/useful_networks/preprocess/vgg.py" />
+        <option value="$PROJECT_DIR$/data_stream_tools/data_stream.py" />
+        <option value="$PROJECT_DIR$/useful_networks/model.py" />
+        <option value="$PROJECT_DIR$/data_stream_tools/preprocess_table.py" />
+        <option value="$PROJECT_DIR$/code_for_buildup_training/sess&amp;env.py" />
       </list>
     </option>
   </component>
@@ -241,15 +231,16 @@
       <workItem from="1574046794451" duration="3925000" />
       <workItem from="1574155437809" duration="5653000" />
       <workItem from="1574333486774" duration="599000" />
-      <workItem from="1574390896305" duration="8929000" />
+      <workItem from="1574390896305" duration="12495000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19106000" />
+    <option name="totallyTimeSpent" value="22672000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25773746" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -334,16 +325,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/data_stream_tools/cifar10_input.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/explainAI_Adversarial/attack_method.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="28" selection-start-line="28" selection-end-line="38" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/explainAI_Adversarial/GradCam_demo.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
@@ -381,45 +362,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/code_for_buildup_training/sess&amp;env.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/useful_networks/usdful_function.py">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/useful_networks/model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="41" column="64" lean-forward="true" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="64" />
-          <folding>
-            <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data_stream_tools/data_stream.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="175" column="60" lean-forward="true" selection-start-line="172" selection-start-column="12" selection-end-line="175" selection-end-column="60" />
-          <folding>
-            <element signature="e#0#67#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/useful_networks/preprocess/inception.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7590">
-          <caret line="345" column="36" selection-start-line="345" selection-start-column="36" selection-end-line="345" selection-end-column="36" />
-          <folding>
-            <element signature="e#764#802#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/useful_networks/preprocess/cifar.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -438,6 +382,62 @@
           <folding>
             <element signature="e#1185#1223#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/useful_networks/preprocess/inception.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-650">
+          <caret line="296" column="20" selection-start-line="296" selection-start-column="4" selection-end-line="296" selection-end-column="20" />
+          <folding>
+            <element signature="e#764#802#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data_stream_tools/cifar10_input.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2508" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data_stream_tools/preprocess_table.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="46" lean-forward="true" selection-start-line="5" selection-start-column="46" selection-end-line="5" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data_stream_tools/data_stream.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2012">
+          <caret line="109" selection-start-line="109" selection-end-line="109" />
+          <folding>
+            <element signature="e#0#67#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code_for_buildup_training/sess&amp;env.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/useful_networks/model.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/explainAI_Adversarial/attack_method.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="5" selection-start-line="5" selection-end-line="16" />
         </state>
       </provider>
     </entry>
