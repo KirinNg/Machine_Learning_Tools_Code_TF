@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="bfde0ef8-9807-4e87-88d4-1ce9ed13d081" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,62 +14,9 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/explainAI_Adversarial/attack_method.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="21" column="21" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
-              <folding>
-                <element signature="e#0#23#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data_stream_tools/data_stream.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2288">
-              <caret line="109" selection-start-line="109" selection-end-line="109" />
-              <folding>
-                <element signature="e#0#67#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/data_stream_tools/cifar10_input.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/useful_networks/preprocess/inception.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="6380">
-              <caret line="296" column="20" selection-start-line="296" selection-start-column="4" selection-end-line="296" selection-end-column="20" />
-              <folding>
-                <element signature="e#764#802#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/useful_networks/preprocess/cifar.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2992">
-              <caret line="141" column="36" selection-start-line="141" selection-start-column="36" selection-end-line="141" selection-end-column="36" />
-              <folding>
-                <element signature="e#746#784#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/useful_networks/preprocess/vgg.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7612">
+            <state relative-caret-position="7722">
               <caret line="351" column="62" selection-start-line="351" selection-start-column="62" selection-end-line="351" selection-end-column="62" />
               <folding>
                 <element signature="e#1185#1223#0" expanded="true" />
@@ -86,11 +34,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/useful_networks/nets/lenet.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="286">
-              <caret line="65" column="23" lean-forward="true" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
+            <state relative-caret-position="1342">
+              <caret line="65" column="23" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/explainAI_Adversarial/demo_sklearn.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1650">
+              <caret line="75" selection-start-line="75" selection-end-line="75" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code_for_buildup_training/eval_training.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="352">
+              <caret line="16" selection-start-line="16" selection-end-line="16" />
             </state>
           </provider>
         </entry>
@@ -103,8 +72,40 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/code_for_buildup_training/loop&amp;calculating_time.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="15" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="374">
+              <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/code_for_buildup_training/learning_rate.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="242">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/fabfile.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+            <state split_layout="SPLIT">
+              <first_editor relative-caret-position="242">
+                <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+              </first_editor>
+              <second_editor />
             </state>
           </provider>
         </entry>
@@ -137,6 +138,8 @@
         <option value="$PROJECT_DIR$/useful_networks/model.py" />
         <option value="$PROJECT_DIR$/data_stream_tools/preprocess_table.py" />
         <option value="$PROJECT_DIR$/code_for_buildup_training/sess&amp;env.py" />
+        <option value="$PROJECT_DIR$/explainAI_Adversarial/demo_sklearn.py" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -150,6 +153,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -160,40 +164,18 @@
             <path>
               <item name="Machine_Learning_Tools_Code_TF" type="b2602c69:ProjectViewProjectNode" />
               <item name="Machine_Learning_Tools_Code_TF" type="462c0819:PsiDirectoryNode" />
-              <item name="code_for_buildup_training" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Machine_Learning_Tools_Code_TF" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Machine_Learning_Tools_Code_TF" type="462c0819:PsiDirectoryNode" />
               <item name="data_stream_tools" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Machine_Learning_Tools_Code_TF" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Machine_Learning_Tools_Code_TF" type="462c0819:PsiDirectoryNode" />
-              <item name="explainAI_Adversarial" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Machine_Learning_Tools_Code_TF" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Machine_Learning_Tools_Code_TF" type="462c0819:PsiDirectoryNode" />
-              <item name="useful_networks" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Machine_Learning_Tools_Code_TF" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Machine_Learning_Tools_Code_TF" type="462c0819:PsiDirectoryNode" />
-              <item name="useful_networks" type="462c0819:PsiDirectoryNode" />
-              <item name="nets" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="/mnt/exdata2/python_coda/liner_data" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
@@ -232,17 +214,20 @@
       <workItem from="1574155437809" duration="5653000" />
       <workItem from="1574333486774" duration="599000" />
       <workItem from="1574390896305" duration="16253000" />
-      <workItem from="1575440701994" duration="8227000" />
+      <workItem from="1575440701994" duration="9058000" />
+      <workItem from="1576907256925" duration="1225000" />
+      <workItem from="1577150742010" duration="1849000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="34657000" />
+    <option name="totallyTimeSpent" value="38562000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1053" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26040554" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.26627535" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -305,20 +290,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
           <caret line="22" selection-start-line="22" selection-end-line="22" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code_for_buildup_training/learning_rate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="242">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code_for_buildup_training/eval_training.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-584">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
         </state>
       </provider>
     </entry>
@@ -394,7 +365,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/useful_networks/preprocess/inception.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6380">
+        <state relative-caret-position="6512">
           <caret line="296" column="20" selection-start-line="296" selection-start-column="4" selection-end-line="296" selection-end-column="20" />
           <folding>
             <element signature="e#764#802#0" expanded="true" />
@@ -404,7 +375,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/useful_networks/preprocess/cifar.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2992">
+        <state relative-caret-position="3102">
           <caret line="141" column="36" selection-start-line="141" selection-start-column="36" selection-end-line="141" selection-end-column="36" />
           <folding>
             <element signature="e#746#784#0" expanded="true" />
@@ -414,21 +385,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/useful_networks/preprocess/vgg.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7612">
+        <state relative-caret-position="7722">
           <caret line="351" column="62" selection-start-line="351" selection-start-column="62" selection-end-line="351" selection-end-column="62" />
           <folding>
             <element signature="e#1185#1223#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/useful_networks/usdful_function.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/code_for_buildup_training/loop&amp;calculating_time.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="15" selection-start-line="15" selection-end-line="15" />
         </state>
       </provider>
     </entry>
@@ -441,8 +402,61 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/useful_networks/nets/lenet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="286">
-          <caret line="65" column="23" lean-forward="true" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
+        <state relative-caret-position="1342">
+          <caret line="65" column="23" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/explainAI_Adversarial/demo_sklearn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1650">
+          <caret line="75" selection-start-line="75" selection-end-line="75" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code_for_buildup_training/eval_training.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="352">
+          <caret line="16" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/useful_networks/usdful_function.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code_for_buildup_training/loop&amp;calculating_time.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/code_for_buildup_training/learning_rate.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="242">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fabfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="242">
+            <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
