@@ -4,11 +4,13 @@ import numpy as np
 import tensorflow as tf
 import os
 import tensorflow.contrib.slim as slim
-
+import scipy.io
+import matplotlib.pyplot as plt
 
 PATH_MNIST = "/home/kirin/Python_Code/#DATASET/MNIST"
 PATH_CIFAR = "/home/kirin/Python_Code/#DATASET/Cifar/cifar-10-batches-py"
 PATH_IMAGENET = "/mnt/exdata2/ImageNet_tfrecord/tfrecord"
+PATH_SVHN = "D:/datasets"
 
 
 class MNIST_datastream:
@@ -29,14 +31,15 @@ class MNIST_datastream:
         self.test_data = self.test_iterator.get_next()
 
         # init
-        total_train_img = np.vstack((self.mnist.train.images, self.mnist.validation.images))
-        total_train_label = np.vstack((self.mnist.train.labels, self.mnist.validation.labels))
+        total_train_img = np.vstack(
+            (self.mnist.train.images, self.mnist.validation.images))
+        total_train_label = np.vstack(
+            (self.mnist.train.labels, self.mnist.validation.labels))
         sess.run(self.train_iterator.initializer,
                  feed_dict={features_placeholder: total_train_img, labels_placeholder: total_train_label})
 
         sess.run(self.test_iterator.initializer,
                  feed_dict={features_placeholder: self.mnist.test.images, labels_placeholder: self.mnist.test.labels})
-
 
     def get_train_batch(self):
         image, label = self.sess.run([self.train_data[0], self.train_data[1]])
@@ -65,7 +68,8 @@ class Cifar_datastream:
             cifar_label = cifar[b'labels']
             cifar_image = cifar[b'data']
             cifar_image_name = cifar[b'filenames']
-            cifar_image = cifar_image.reshape(10000, 3, 32, 32).transpose(0, 2, 3, 1).astype("float")
+            cifar_image = cifar_image.reshape(
+                10000, 3, 32, 32).transpose(0, 2, 3, 1).astype("float")
 
             cifar_label = np.array(cifar_label)
             cifar_image_name = np.array(cifar_image_name)
@@ -85,7 +89,8 @@ class Cifar_datastream:
         cifar_label = cifar[b'labels']
         cifar_image = cifar[b'data']
         cifar_image_name = cifar[b'filenames']
-        cifar_image = cifar_image.reshape(10000, 3, 32, 32).transpose(0, 2, 3, 1).astype("float")
+        cifar_image = cifar_image.reshape(
+            10000, 3, 32, 32).transpose(0, 2, 3, 1).astype("float")
 
         test_cifar_image.extend(cifar_image)
         test_cifar_label.extend(cifar_label)
@@ -93,7 +98,6 @@ class Cifar_datastream:
 
         img_placeholder = tf.placeholder(tf.float32, [None, 32, 32, 3])
         labels_placeholder = tf.placeholder(tf.int32, [None])
-
 
         self.train_data_img = img_placeholder
         self.test_data_img = img_placeholder
@@ -114,7 +118,6 @@ class Cifar_datastream:
         sess.run(self.test_iterator.initializer,
                  feed_dict={img_placeholder: test_cifar_image, labels_placeholder: test_cifar_label})
 
-
     def unpickle(self, file):
         with open(file, 'rb') as f:
             cifar_dict = pickle.load(f, encoding='bytes')
@@ -132,9 +135,11 @@ class Cifar_datastream:
 class ImageNet_datastream:
     def __init__(self, sess, batchsize=10, imgsize=224, just_eval=False):
         self.sess = sess
-        self.val_img_batch, self.val_label_batch = self.read_and_decode(PATH_IMAGENET, "val", batchsize, imgsize)
+        self.val_img_batch, self.val_label_batch = self.read_and_decode(
+            PATH_IMAGENET, "val", batchsize, imgsize)
         if not just_eval:
-            self.train_img_batch, self.train_label_batch = self.read_and_decode(PATH_IMAGENET, "train", batchsize, imgsize)
+            self.train_img_batch, self.train_label_batch = self.read_and_decode(
+                PATH_IMAGENET, "train", batchsize, imgsize)
 
         coord = tf.train.Coordinator()
         threads = tf.train.start_queue_runners(self.sess, coord)
@@ -144,11 +149,14 @@ class ImageNet_datastream:
             file_path = os.path.join(path, "train-*")
             num_samples = 1281167
 
-            dataset = self.get_record_dataset(file_path, num_samples=num_samples, num_classes=1000)
-            data_provider = slim.dataset_data_provider.DatasetDataProvider(dataset, num_readers=128)
+            dataset = self.get_record_dataset(
+                file_path, num_samples=num_samples, num_classes=1000)
+            data_provider = slim.dataset_data_provider.DatasetDataProvider(
+                dataset, num_readers=128)
             image, label = data_provider.get(['image', 'label'])
 
-            image = self._fixed_sides_resize(image, output_height=imgsize, output_width=imgsize)
+            image = self._fixed_sides_resize(
+                image, output_height=imgsize, output_width=imgsize)
 
             # img_batch, label_batch = tf.train.shuffle_batch([image, label], batch_size=batchsize, num_threads=128,
             #                                                 capacity=8192*3, min_after_dequeue=8192*2)
@@ -160,13 +168,17 @@ class ImageNet_datastream:
             file_path = os.path.join(path, "validation-*")
             num_samples = 50000
 
-            dataset = self.get_record_dataset(file_path, num_samples=num_samples, num_classes=1000)
-            data_provider = slim.dataset_data_provider.DatasetDataProvider(dataset)
+            dataset = self.get_record_dataset(
+                file_path, num_samples=num_samples, num_classes=1000)
+            data_provider = slim.dataset_data_provider.DatasetDataProvider(
+                dataset)
             image, label = data_provider.get(['image', 'label'])
 
-            image = self._fixed_sides_resize(image, output_height=imgsize, output_width=imgsize)
+            image = self._fixed_sides_resize(
+                image, output_height=imgsize, output_width=imgsize)
 
-            img_batch, label_batch = tf.train.batch([image, label], batch_size=batchsize, allow_smaller_final_batch=True)
+            img_batch, label_batch = tf.train.batch(
+                [image, label], batch_size=batchsize, allow_smaller_final_batch=True)
             # img_batch, label_batch = tf.train.shuffle_batch([image, label], batch_size=batchsize, num_threads=16,
             #                                                 capacity=4096, min_after_dequeue=512)
             label_batch = tf.one_hot(label_batch-1, 1000)
@@ -231,10 +243,71 @@ class ImageNet_datastream:
             labels_to_names=labels_to_names)
 
     def get_train_batch(self):
-        image, label = self.sess.run([self.train_img_batch, self.train_label_batch])
+        image, label = self.sess.run(
+            [self.train_img_batch, self.train_label_batch])
         return image, label
 
     def get_test_batch(self):
-        image, label = self.sess.run([self.val_img_batch, self.val_label_batch])
+        image, label = self.sess.run(
+            [self.val_img_batch, self.val_label_batch])
         return image, label
 
+
+class SVHN_datastream:
+    def __init__(self, sess, batchsize=128, augmentation=True):
+        self.sess = sess
+        self.IMAGE_SIZE = 32
+        self.TEST_IMAGE_COUNT = 26032
+        self.TRAIN_IMAGE_COUNT = 73257
+
+        print("Reading...{}".format("train_set"))
+        svhn_file = f"{PATH_SVHN}/train_32x32.mat"
+        train_svhn_image, train_svhn_label = self.unpickle(svhn_file)
+        train_svhn_image = train_svhn_image.reshape(
+            32, 32, 3, self.TRAIN_IMAGE_COUNT).transpose(3, 0, 1, 2).astype("float")
+        train_svhn_label = train_svhn_label.reshape(
+            self.TRAIN_IMAGE_COUNT).astype("int")
+
+        print("Reading...{}".format("test_set"))
+        svhn_file = f"{PATH_SVHN}/test_32x32.mat"
+        test_svhn_image, test_svhn_label = self.unpickle(svhn_file)
+        test_svhn_image = test_svhn_image.reshape(
+            32, 32, 3, self.TEST_IMAGE_COUNT).transpose(3, 0, 1, 2).astype("float")
+        test_svhn_label = test_svhn_label.reshape(
+            self.TEST_IMAGE_COUNT).astype("int")
+        img_placeholder = tf.placeholder(tf.float32, [None, 32, 32, 3])
+        labels_placeholder = tf.placeholder(tf.int32, [None])
+
+        self.train_data_img = img_placeholder
+        self.test_data_img = img_placeholder
+
+        self.train_iterator = tf.data.Dataset.from_tensor_slices(
+            (self.train_data_img, tf.one_hot(labels_placeholder, 10))).shuffle(
+            20).batch(batchsize).repeat().make_initializable_iterator()
+        self.train_data = self.train_iterator.get_next()
+
+        self.test_iterator = tf.data.Dataset.from_tensor_slices(
+            (self.test_data_img, tf.one_hot(labels_placeholder, 10))).shuffle(
+            1).batch(batchsize).repeat().make_initializable_iterator()
+        self.test_data = self.test_iterator.get_next()
+
+        sess.run(self.train_iterator.initializer,
+                 feed_dict={img_placeholder: train_svhn_image, labels_placeholder: train_svhn_label})
+
+        sess.run(self.test_iterator.initializer,
+                 feed_dict={img_placeholder: test_svhn_image, labels_placeholder: test_svhn_label})
+
+    def get_train_batch(self):
+        image, label = self.sess.run([self.train_data[0], self.train_data[1]])
+        return image, label
+
+    def get_test_batch(self):
+        image, label = self.sess.run([self.test_data[0], self.test_data[1]])
+        return image, label
+
+    def unpickle(self, file):
+        image = scipy.io.loadmat(file, variable_names='X').get('X')
+        label = scipy.io.loadmat(file, variable_names='y').get('y')
+        # 十个标签归0,0-0
+        label[label == 10] = 0
+        return image, label
