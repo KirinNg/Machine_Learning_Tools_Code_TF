@@ -61,3 +61,29 @@ with tf.name_scope("acc"):
     tf.summary.scalar('top-5', acc_top_5)
 
 summary_op = tf.summary.merge_all()
+
+
+# 读取模型时变量名域不统一方法
+from tensorflow.python import pywrap_tensorflow
+model = VGG16()  # 此处构建vgg16模型
+variables = tf.global_variables()  # 获取模型中所有变量
+
+file_name = 'vgg16.ckpt'  # vgg16网络模型
+reader = pywrap_tensorflow.NewCheckpointReader(file_name)
+var_to_shape_map = reader.get_variable_to_shape_map()  # 获取ckpt模型中的变量名
+print(var_to_shape_map)
+
+sess = tf.Session()
+
+my_scope = 'my/'  # 外加的空间名
+variables_to_restore = {}  # 构建字典：需要的变量和对应的模型变量的映射
+for v in variables:
+    if my_scope in v.name and v.name.split(':')[0].split(my_scope)[1] in var_to_shape_map:
+        print('Variables restored: %s' % v.name)
+        variables_to_restore[v.name.split(':0')[0][len(my_scope):]] = v
+    elif v.name.split(':')[0] in var_to_shape_map:
+        print('Variables restored: %s' % v.name)
+        variables_to_restore[v.name] = v
+
+restorer = tf.train.Saver(variables_to_restore)  # 将需要加载的变量作为参数输入
+restorer.restore(sess, file_name)
